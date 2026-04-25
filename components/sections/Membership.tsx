@@ -1,5 +1,6 @@
 'use client'
 import { useRef } from 'react'
+import Image from 'next/image'
 import { useFadeUpStagger } from '@/hooks/useGSAP'
 
 export default function Membership() {
@@ -33,7 +34,7 @@ export default function Membership() {
 
         {/* Image Card */}
         <div className="bento-item opacity-0 relative rounded-md overflow-hidden bg-surface min-h-[400px] lg:min-h-full">
-          <img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=1470&auto=format&fit=crop" alt="Research Success" className="absolute inset-0 w-full h-full object-cover opacity-60 grayscale" />
+          <Image src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=1470&auto=format&fit=crop" alt="Research Success" fill className="object-cover opacity-60 grayscale" />
         </div>
 
         {/* Highlight Card - Achievements */}

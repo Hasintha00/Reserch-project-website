@@ -1,5 +1,6 @@
 'use client'
 import { useRef } from 'react'
+import Image from 'next/image'
 import { useFadeUpStagger } from '@/hooks/useGSAP'
 
 const features = [
@@ -28,7 +29,7 @@ export default function AppFeatures() {
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-6 bg-white rounded-b-xl" />
               
               <div className="w-full h-full rounded-[1.5rem] overflow-hidden relative bg-black">
-                <img src={feat.img} alt="System Layer" className="w-full h-full object-cover opacity-80" />
+                <Image src={feat.img} alt="System Layer" fill className="object-cover opacity-80" />
                 <div className="absolute bottom-6 left-0 right-0 flex justify-center">
                   <span className="bg-black/40 backdrop-blur-md border border-white/20 text-white font-semibold text-sm px-4 py-2 rounded-lg">
                     {feat.label}

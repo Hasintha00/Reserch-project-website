@@ -3,10 +3,12 @@ import { useRef } from 'react'
 import { useHeroParallax } from '@/hooks/useGSAP'
 import { gsap } from '@/lib/gsap'
 import { useEffect } from 'react'
+import Image from 'next/image'
 
 export default function Hero() {
   const bgRef = useRef<HTMLImageElement>(null)
   
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   useHeroParallax(bgRef as any)
 
   useEffect(() => {
@@ -19,11 +21,12 @@ export default function Hero() {
   return (
     <section id="home" className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-primary">
       <div className="absolute inset-0 z-0">
-        <img 
+        <Image 
           ref={bgRef}
           src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1470&auto=format&fit=crop" 
           alt="Gym background" 
-          className="w-full h-[130%] object-cover object-top -top-[15%] relative opacity-40 grayscale-[20%]"
+          fill
+          className="object-cover object-top -top-[15%] relative opacity-40 grayscale-[20%]"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />

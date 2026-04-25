@@ -1,5 +1,6 @@
 'use client'
 import { useRef } from 'react'
+import Image from 'next/image'
 import { useFadeUpStagger } from '@/hooks/useGSAP'
 
 export default function Location() {
@@ -18,7 +19,7 @@ export default function Location() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[300px]">
           <div className="loc-card opacity-0 relative rounded-md overflow-hidden bg-surface hover:-translate-y-2 transition-transform duration-300">
-            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1470&auto=format&fit=crop" alt="Phase 1" className="absolute inset-0 w-full h-full object-cover opacity-50 grayscale" />
+            <Image src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1470&auto=format&fit=crop" alt="Phase 1" fill className="object-cover opacity-50 grayscale" />
             <div className="absolute inset-0 p-8 flex flex-col justify-end bg-gradient-to-t from-black via-black/20 to-transparent">
               <p className="text-lime text-xs font-bold uppercase tracking-widest mb-1">PHASE 1 & 2</p>
               <h3 className="text-white font-black text-2xl uppercase tracking-wide">Research & Model Development</h3>
@@ -26,7 +27,7 @@ export default function Location() {
           </div>
           
           <div className="loc-card opacity-0 relative rounded-md overflow-hidden bg-surface hover:-translate-y-2 transition-transform duration-300">
-            <img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=1470&auto=format&fit=crop" alt="Phase 3" className="absolute inset-0 w-full h-full object-cover opacity-50 grayscale" />
+            <Image src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=1470&auto=format&fit=crop" alt="Phase 3" fill className="object-cover opacity-50 grayscale" />
             <div className="absolute inset-0 p-8 flex flex-col justify-end bg-gradient-to-t from-black via-black/20 to-transparent">
               <p className="text-accent text-xs font-bold uppercase tracking-widest mb-1">PHASE 3 & 4</p>
               <h3 className="text-white font-black text-2xl uppercase tracking-wide">System Integration & Testing</h3>

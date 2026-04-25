@@ -1,5 +1,6 @@
 'use client'
 import { useRef } from 'react'
+import Image from 'next/image'
 import { useFadeUpStagger } from '@/hooks/useGSAP'
 
 const team = [
@@ -37,7 +38,7 @@ export default function PersonalTraining() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {team.map((member, i) => (
             <div key={i} className="trainer-img opacity-0 relative aspect-[3/4] rounded-md overflow-hidden bg-black group hover:-translate-y-2 transition-transform duration-300">
-              <img src={member.img} alt={member.name} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
+              <Image src={member.img} alt={member.name} fill className="object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="absolute bottom-4 left-4 bg-white/90 px-3 py-1 rounded text-black text-xs font-bold shadow">
                 {member.name}
               </div>

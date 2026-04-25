@@ -1,6 +1,5 @@
 'use client'
-import { useRef, useEffect } from 'react'
-import { gsap } from '@/lib/gsap'
+import { useRef } from 'react'
 import { useFadeUpStagger } from '@/hooks/useGSAP'
 
 export default function ProjectScope() {
