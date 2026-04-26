@@ -4,6 +4,7 @@ import { useHeroParallax } from '@/hooks/useGSAP'
 import { gsap } from '@/lib/gsap'
 import { useEffect } from 'react'
 import Image from 'next/image'
+import TextPressure from '@/components/ui/TextPressure'
 
 export default function Hero() {
   const bgRef = useRef<HTMLImageElement>(null)
@@ -38,9 +39,36 @@ export default function Hero() {
             AI-POWERED FITNESS COACH
           </div>
           
-          <h1 className="hero-anim text-white text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter leading-[0.95] mb-8">
-            FITFORGE AI — <br/> FULLY AUTOMATED
-          </h1>
+          <div className="hero-anim mb-8 flex flex-col w-full max-w-4xl">
+            <div className="relative h-[48px] md:h-[72px] lg:h-[96px] w-full">
+              <TextPressure
+                text="FITFORGE AI —"
+                flex={true}
+                alpha={false}
+                stroke={false}
+                width={true}
+                weight={true}
+                italic={true}
+                textColor="#ffffff"
+                strokeColor="#ff0000"
+                minFontSize={36}
+              />
+            </div>
+            <div className="relative h-[48px] md:h-[72px] lg:h-[96px] w-full mt-2">
+              <TextPressure
+                text="FULLY AUTOMATED"
+                flex={true}
+                alpha={false}
+                stroke={false}
+                width={true}
+                weight={true}
+                italic={true}
+                textColor="#ffffff"
+                strokeColor="#ff0000"
+                minFontSize={36}
+              />
+            </div>
+          </div>
           
           <p className="hero-anim text-white/60 text-lg md:text-xl max-w-xl mb-10 leading-relaxed">
             Turn your smartphone into a fully automated personal trainer using AI, computer vision, and predictive analytics. Personalized workouts, hands-free tracking, and real-time form correction.

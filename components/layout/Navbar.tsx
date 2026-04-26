@@ -75,9 +75,7 @@ export default function Navbar() {
 
         {/* CTA */}
         <div className="nav-animate hidden md:block">
-          <a href="#downloads" className="bg-white text-black font-black text-xs tracking-widest uppercase px-6 py-3 rounded hover:bg-lime transition-colors">
-            GET PROPOSAL
-          </a>
+          
         </div>
         
         {/* Mobile menu button */}
