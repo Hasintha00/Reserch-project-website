@@ -6,7 +6,7 @@ import { useFadeUpStagger } from '@/hooks/useGSAP'
 const team = [
   { img: '/images/team/member1.jpg', name: 'Dissanayake D.M.K.N' },
   { img: '/images/team/Hasintha.jpeg', name: 'Meegahawala M.L.H.I' },
-  { img: '/images/team/samindi.jpeg', name: 'Samindi' },
+  { img: '/images/team/samindi.jpeg', name: 'Sachinthana G.S.' },
   { img: '/images/team/mohmed.jpeg', name: 'Mohamed M.F.I' }
 ]
 
