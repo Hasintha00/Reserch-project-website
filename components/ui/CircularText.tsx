@@ -1,20 +1,20 @@
 'use client';
 import { useEffect } from 'react';
-import { motion, useAnimation, useMotionValue } from 'motion/react';
+import { motion, useAnimation, useMotionValue, Transition } from 'motion/react';
 
 const getRotationTransition = (duration: number, from: number, loop = true) => ({
   from,
   to: from + 360,
   ease: 'linear',
   duration,
-  type: 'tween',
+  type: 'tween' as const,
   repeat: loop ? Infinity : 0
 });
 
-const getTransition = (duration: number, from: number) => ({
+const getTransition = (duration: number, from: number): Transition => ({
   rotate: getRotationTransition(duration, from),
   scale: {
-    type: 'spring',
+    type: 'spring' as const,
     damping: 20,
     stiffness: 300
   }
@@ -45,8 +45,7 @@ const CircularText = ({ text, spinDuration = 20, onHover = 'speedUp', className 
     const start = rotation.get();
     if (!onHover) return;
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let transitionConfig: any;
+    let transitionConfig: Transition;
     let scaleVal = 1;
 
     switch (onHover) {
@@ -58,8 +57,8 @@ const CircularText = ({ text, spinDuration = 20, onHover = 'speedUp', className 
         break;
       case 'pause':
         transitionConfig = {
-          rotate: { type: 'spring', damping: 20, stiffness: 300 },
-          scale: { type: 'spring', damping: 20, stiffness: 300 }
+          rotate: { type: 'spring' as const, damping: 20, stiffness: 300 },
+          scale: { type: 'spring' as const, damping: 20, stiffness: 300 }
         };
         scaleVal = 1;
         break;
