@@ -23,7 +23,7 @@ export default function Hero() {
       <div className="absolute inset-0 z-0">
         <Image 
           ref={bgRef}
-          src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1470&auto=format&fit=crop" 
+          src="/images/Main Hero & Location Backgrounds.png" 
           alt="Gym background" 
           fill
           className="object-cover object-top -top-[15%] relative opacity-40 grayscale-[20%]"
@@ -47,11 +47,29 @@ export default function Hero() {
           </p>
           
           <div className="hero-anim flex flex-wrap items-center gap-4">
-            <a href="#scope" className="bg-accent text-white font-black text-sm tracking-widest uppercase px-8 py-4 rounded-sm hover:scale-105 transition-transform flex items-center gap-2">
-              EXPLORE PROJECT SCOPE
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
+            <a 
+              href="#scope" 
+              className="relative overflow-hidden bg-accent text-white font-black text-sm tracking-widest uppercase px-8 py-4 rounded-sm hover:scale-105 transition-all duration-300 group flex items-center gap-2 hover:shadow-[0_0_25px_rgba(255,90,31,0.6)]"
+            >
+              {/* Button Text with subtle lift */}
+              <span className="relative z-10 flex items-center gap-2 group-hover:-translate-y-0.5 transition-transform duration-300">
+                EXPLORE PROJECT SCOPE
+                <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
+              </span>
+              
+              {/* Texture/Glint Layer with Noise Overlay */}
+              <div 
+                className="absolute inset-0 z-0 w-[60%] -skew-x-[25deg] -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-[750ms]"
+                style={{
+                  background: 'linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent)',
+                  backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+                  backgroundBlendMode: 'overlay',
+                  transitionTimingFunction: 'cubic-bezier(0.43, 0.13, 0.23, 0.96)'
+                }}
+              ></div>
+
+              {/* Subtle Inner Glow on Hover */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-[inset_0_0_20px_rgba(255,255,255,0.2)] pointer-events-none" />
             </a>
             <a href="#about" className="bg-transparent border-2 border-white text-white font-black text-sm tracking-widest uppercase px-8 py-4 rounded-sm hover:scale-105 transition-transform flex items-center gap-2">
               MEET THE TEAM

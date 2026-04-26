@@ -4,9 +4,9 @@ import Image from 'next/image'
 import { useFadeUpStagger } from '@/hooks/useGSAP'
 
 const features = [
-  { img: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1470&auto=format&fit=crop', label: '1. Data Collection Layer' },
-  { img: 'https://images.unsplash.com/photo-1526506114642-54cb5e01fa39?q=80&w=1470&auto=format&fit=crop', label: '2. Processing & YOLO CV' },
-  { img: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=1470&auto=format&fit=crop', label: '3. LSTM Predictive Output' },
+  { img: '/images/Layer 1 (Data Collection).png', label: '1. Data Collection Layer' },
+  { img: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?q=80&w=1470&auto=format&fit=crop', label: '2. Processing & YOLO CV' },
+  { img: '/images/Layer 3 (LSTM Predictive Output).png', label: '3. LSTM Predictive Output' },
 ]
 
 export default function AppFeatures() {
