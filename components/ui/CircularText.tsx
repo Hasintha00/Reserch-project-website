@@ -5,7 +5,7 @@ import { motion, useAnimation, useMotionValue, Transition } from 'motion/react';
 const getRotationTransition = (duration: number, from: number, loop = true) => ({
   from,
   to: from + 360,
-  ease: 'linear',
+  ease: 'linear' as const,
   duration,
   type: 'tween' as const,
   repeat: loop ? Infinity : 0
