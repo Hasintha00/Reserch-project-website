@@ -43,7 +43,7 @@ export interface TextPressureProps {
 const TextPressure = ({
   text = 'Compressa',
   fontFamily = 'Compressa VF',
-  fontUrl = 'https://res.cloudinary.com/dr6lvwubh/raw/upload/v1529908256/CompressaPRO-GX.woff2',
+  fontUrl = '/fonts/CompressaPRO-GX.woff2',
 
   width = true,
   weight = true,
@@ -70,10 +70,47 @@ const TextPressure = ({
   const [fontSize, setFontSize] = useState(minFontSize);
   const [scaleY, setScaleY] = useState(1);
   const [lineHeight, setLineHeight] = useState(1);
+  const [fontLoaded, setFontLoaded] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   const chars = text.split('');
 
+  // Track mount state for SSR safety
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Font loading detection — critical for production
+  useEffect(() => {
+    if (!mounted) return;
+
+    const loadFont = async () => {
+      try {
+        // Use the Font Loading API to reliably detect when the font is ready
+        const font = new FontFace(fontFamily, `url('${fontUrl}')`, {
+          style: 'normal',
+        });
+        const loadedFont = await font.load();
+        document.fonts.add(loadedFont);
+        setFontLoaded(true);
+      } catch (err) {
+        console.warn('TextPressure: Variable font failed to load, using fallback', err);
+        // Still show text even if font fails — use fallback styling
+        setFontLoaded(true);
+      }
+    };
+
+    // Check if font is already loaded
+    if (document.fonts.check(`16px "${fontFamily}"`)) {
+      setFontLoaded(true);
+    } else {
+      loadFont();
+    }
+  }, [mounted, fontFamily, fontUrl]);
+
+  useEffect(() => {
+    if (!mounted) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       cursorRef.current.x = e.clientX;
       cursorRef.current.y = e.clientY;
@@ -99,7 +136,7 @@ const TextPressure = ({
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('touchmove', handleTouchMove);
     };
-  }, []);
+  }, [mounted]);
 
   const setSize = useCallback(() => {
     if (!containerRef.current || !titleRef.current) return;
@@ -125,14 +162,25 @@ const TextPressure = ({
     });
   }, [chars.length, minFontSize, scale]);
 
+  // Recalculate size when font loads or on resize
   useEffect(() => {
+    if (!mounted || !fontLoaded) return;
+
     const debouncedSetSize = debounce(setSize, 100);
-    debouncedSetSize();
+    // Immediate call + slight delay to handle font rendering
+    setSize();
+    const timer = setTimeout(setSize, 200);
+
     window.addEventListener('resize', debouncedSetSize);
-    return () => window.removeEventListener('resize', debouncedSetSize);
-  }, [setSize]);
+    return () => {
+      window.removeEventListener('resize', debouncedSetSize);
+      clearTimeout(timer);
+    };
+  }, [setSize, mounted, fontLoaded]);
 
   useEffect(() => {
+    if (!mounted || !fontLoaded) return;
+
     let rafId: number;
     const animate = () => {
       mouseRef.current.x += (cursorRef.current.x - mouseRef.current.x) / 15;
@@ -174,15 +222,16 @@ const TextPressure = ({
 
     animate();
     return () => cancelAnimationFrame(rafId);
-  }, [width, weight, italic, alpha]);
+  }, [width, weight, italic, alpha, mounted, fontLoaded]);
 
   const styleElement = useMemo(() => {
     return (
       <style>{`
         @font-face {
           font-family: '${fontFamily}';
-          src: url('${fontUrl}');
+          src: url('${fontUrl}') format('woff2');
           font-style: normal;
+          font-display: swap;
         }
 
         .text-pressure-flex {
@@ -229,7 +278,7 @@ const TextPressure = ({
         ref={titleRef}
         className={`text-pressure-title ${dynamicClassName}`}
         style={{
-          fontFamily,
+          fontFamily: `'${fontFamily}', 'Inter', Arial, sans-serif`,
           textTransform: 'uppercase',
           fontSize: fontSize,
           lineHeight,
@@ -240,7 +289,10 @@ const TextPressure = ({
           userSelect: 'none',
           whiteSpace: 'nowrap',
           fontWeight: 100,
-          width: '100%'
+          width: '100%',
+          // Ensure text is visible during font load — start visible, animate in
+          opacity: mounted ? 1 : 0,
+          transition: 'opacity 0.3s ease-in',
         }}
       >
         {chars.map((char, i) => (
