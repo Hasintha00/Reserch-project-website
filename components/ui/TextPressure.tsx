@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 
 const dist = (a: {x: number, y: number}, b: {x: number, y: number}) => {
@@ -12,7 +14,7 @@ const getAttr = (distance: number, maxDist: number, minVal: number, maxVal: numb
 };
 
 const debounce = <T extends (...args: unknown[]) => void>(func: T, delay: number) => {
-  let timeoutId: NodeJS.Timeout;
+  let timeoutId: ReturnType<typeof setTimeout>;
   return (...args: Parameters<T>) => {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => {
@@ -183,7 +185,7 @@ const TextPressure = ({
           font-style: normal;
         }
 
-        .flex {
+        .text-pressure-flex {
           display: flex;
           justify-content: space-between;
         }
@@ -210,7 +212,7 @@ const TextPressure = ({
     );
   }, [fontFamily, fontUrl, textColor, strokeColor]);
 
-  const dynamicClassName = [className, flex ? 'flex' : '', stroke ? 'stroke' : ''].filter(Boolean).join(' ');
+  const dynamicClassName = [className, flex ? 'text-pressure-flex' : '', stroke ? 'stroke' : ''].filter(Boolean).join(' ');
 
   return (
     <div
